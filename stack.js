@@ -20,26 +20,46 @@ class Stack {
   /** push(val): add new value to end of the stack. Returns undefined. */
 
   push(val) {
-
+    const newNode = new Node(val);
+    if (this.first === null) {
+      this.first = newNode;
+    } else {
+      newNode.next = this.first;
+      this.first = newNode;
+    }
+    if (this.last === null) {
+      this.last = newNode;
+    }
+    this.size++;
   }
 
   /** pop(): remove the node from the top of the stack
    * and return its value. Should throw an error if the stack is empty. */
 
   pop() {
+    if (this.size === 0) {
+      throw new Error('the stack is empty');
+    }
 
+    const value = this.first.val;
+    this.first = this.first.next;
+    this.size--;
+    return value;
   }
 
   /** peek(): return the value of the first node in the stack. */
 
   peek() {
-
+    if (this.size === 0) {
+      throw new Error('the stack is empty');
+    }
+    return this.first.val;
   }
 
   /** isEmpty(): return true if the stack is empty, otherwise false */
 
   isEmpty() {
-
+    return this.size === 0;
   }
 }
 
